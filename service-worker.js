@@ -26,15 +26,10 @@ self.addEventListener('activate', function (event) {
 });
 
 
-self.addEventListener('fetch', function (event) {
-  try {
-    event.respondWith(
-      caches.match(event.request).then(function (response) {
-        console.log('tes2')
-        return response || fetch(event.request);
-      })
-    );
-  } catch (error) {
-    console.log(error);
-  }
+self.addEventListener('fetch', evt => {
+  evt.respondWith(
+    caches.match(evt.request).then(cacheRes =>{
+      return cacheRes || fetch(evt.request);
+    })
+  )
 });
