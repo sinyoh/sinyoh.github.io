@@ -10,6 +10,7 @@ const _url = [
   '/images/header-background.jpg',
   '/images/logo.png',
   'https://code.getmdl.io/1.3.0/material.grey-pink.min.css',
+   '/offline.html',
 ];
 
 self.addEventListener('install', evt =>{
@@ -21,15 +22,28 @@ self.addEventListener('install', evt =>{
   )
 });
 
-self.addEventListener('activate', function (event) {
-  console.log('sw activated')
+
+self.addEventListener('activate', evt =>{
+  evt.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(keys
+        .filter(key => key !== _cacheName)
+        .map(key => caches.delete())
+        )
+    })
+  );
 });
 
 
 self.addEventListener('fetch', evt => {
   evt.respondWith(
     caches.match(evt.request).then(cacheRes =>{
-      return cacheRes || fetch(evt.request);
+      return cacheRes || fetch(evt.request).then(fetchRes =>{
+        return caches.open(_cacheNameDyn).then(cache => {
+          cache.put(evt.request.url, fetchRes)
+          return fetchRes;
+        })
+      });
     })
   )
 });
