@@ -20,7 +20,9 @@ self.addEventListener('install', evt =>{
       console.log('catching shell assets');
       caches.addAll(_url);
     })
-  )
+  );
+  console.log("test");
+  
 });
 
 
