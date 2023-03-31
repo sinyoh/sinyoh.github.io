@@ -1,5 +1,5 @@
 const _cacheName = 'my_cache';
-
+const _cacheNameDyn = 'my_cache_dyn';
 //cached file
 const _url = [
   '/',
