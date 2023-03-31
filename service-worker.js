@@ -27,7 +27,7 @@ self.addEventListener('activate', evt =>{
   evt.waitUntil(
     caches.keys().then(keys => {
       return Promise.all(keys
-        .filter(key => key !== _cacheName)
+        .filter(key => key !== _cacheName && key !== _cacheNameDyn)
         .map(key => caches.delete())
         )
     })
@@ -44,6 +44,7 @@ self.addEventListener('fetch', evt => {
           return fetchRes;
         })
       });
-    })
-  )
+    }).catch(() => caches.match('/offline.html'))
+  );
 });
+
