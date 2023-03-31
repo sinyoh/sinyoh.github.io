@@ -24,7 +24,7 @@ self.addEventListener('install', function (event) {
 
 self.addEventListener('activate', function (event) {
   console.log('sw activated')
-)};
+});
 
 
 self.addEventListener('fetch', function (event) {
