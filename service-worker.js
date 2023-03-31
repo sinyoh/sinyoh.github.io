@@ -41,11 +41,10 @@ self.addEventListener('activate', evt =>{
 self.addEventListener('fetch', evt => {
   evt.respondWith(
     caches.match(evt.request).then(cacheRes =>{
-      return cacheRes || fetch(evt.request).then(fetchRes =>{
-        return caches.open(_cacheNameDyn).then(cache => {
-          cache.put(evt.request.url, fetchRes)
-          return fetchRes;
-        })
+      return cacheRes || fetch(evt.request).then(async fetchRes =>{
+        const cache = await caches.open(_cacheNameDyn);
+        cache.put(evt.request.url, fetchRes);
+        return fetchRes;
       });
     }).catch(() => caches.match('/offline.html'))
   );
