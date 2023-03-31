@@ -3,6 +3,7 @@ const _cacheName = 'my_cache';
 //cached file
 const _url = [
   '/',
+  '/index.html',
   '/styles.css',
   '/images/about-header.jpg',
   '/images/contact-image.jpg',
