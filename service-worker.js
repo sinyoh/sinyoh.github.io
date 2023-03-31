@@ -1,8 +1,3 @@
-// workbox.routing.registerRoute(
-//     ({request}) => request.destination === 'image',
-//     new workbox.strategies.NetworkFirst()
-// );
-
 const _cacheName = 'my_cache';
 
 //cached file
