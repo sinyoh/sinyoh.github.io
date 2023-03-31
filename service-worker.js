@@ -13,6 +13,7 @@ const _url = [
 ];
 
 self.addEventListener('install', function (event) {
+  console.log('sw installed')
   event.waitUntil(
     caches.open(_cacheName).then(function (cache) {
       console.log('tes');
