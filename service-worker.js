@@ -12,14 +12,13 @@ const _url = [
   'https://code.getmdl.io/1.3.0/material.grey-pink.min.css',
 ];
 
-self.addEventListener('install', function (event) {
-  console.log('sw installed')
-  event.waitUntil(
-    caches.open(_cacheName).then(function (cache) {
-      console.log('tes');
-      return cache.addAll(_url);
+self.addEventListener('install', evt =>{
+  evt.waitUntil(
+    caches.open(_cacheName).then(caches=>{
+      console.log('catching shell assets');
+      caches.addAll(_url);
     })
-  );
+  )
 });
 
 self.addEventListener('activate', function (event) {
