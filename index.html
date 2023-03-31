@@ -40,13 +40,10 @@
     <script>
       
         if('serviceWorker' in navigator){
-            try{
-                navigator.serviceWorker.register('/service-worker.js');
-            }catch(e){
-                console.log('failed');
-            }
-        };
-      
+            navigator.serviceWorker.register('/service-worker.js')
+            .then((reg) => console.log('sw regis'))
+            .catch((err) => console.log('sw no regis'))
+        }
        
     </script>
 
