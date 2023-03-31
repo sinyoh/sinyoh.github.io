@@ -23,9 +23,14 @@ self.addEventListener('install', function (event) {
 
 
 self.addEventListener('fetch', function (event) {
-  event.respondWith(
-    caches.match(event.request).then(function (response) {
-      return response || fetch(event.request);
-    })
-  );
+  try {
+    event.respondWith(
+      caches.match(event.request).then(function (response) {
+        console.log('tes2')
+        return response || fetch(event.request);
+      })
+    );
+  } catch (error) {
+    console.log(error);
+  }
 });
